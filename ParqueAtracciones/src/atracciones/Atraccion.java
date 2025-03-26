@@ -1,5 +1,5 @@
 package atracciones;
 
-public class Atraccion {
+public abstract class Atraccion {
 
 }
