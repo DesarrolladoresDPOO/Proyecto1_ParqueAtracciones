@@ -51,6 +51,9 @@ public abstract class Atraccion {
 		this.nivelExclusividad = nivelExclusividad;
 	}
 	
-	public abstract void aptaParaCliente();
+	public void aptaParaCliente(int edadUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

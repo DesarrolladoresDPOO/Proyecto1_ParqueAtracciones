@@ -20,10 +20,20 @@ public class AtraccionCultural extends Atraccion{
 		super(nombre, cupoMaximo, empleadosEncargados, disponibleClima, nivelExclusividad);
 		this.edadMinima = edadMinima;
 	}
-
+	
+	boolean respuesta;
+	
 	@Override
-	public void aptaParaCliente() {
-		
+	public void aptaParaCliente(int edadUsuario) {
+		if (edadUsuario < getEdadMinima()) {
+			respuesta= false;
+		}else {
+			respuesta= true;
+		}
+	}
+
+	public boolean isRespuesta() {
+		return respuesta;
 	}
 	
 }
