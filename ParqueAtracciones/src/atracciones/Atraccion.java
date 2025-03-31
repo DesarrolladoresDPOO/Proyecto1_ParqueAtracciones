@@ -7,6 +7,7 @@ public abstract class Atraccion {
 	private int empleadosEncargados;
 	private boolean disponibleClima;
 	private String nivelExclusividad;
+	private Ubicacion ubicacion;
 	
 	// Getters y Setters
 	
@@ -40,6 +41,12 @@ public abstract class Atraccion {
 	public void setNivelExclusividad(String nivelExclusividad) {
 		this.nivelExclusividad = nivelExclusividad;
 	}
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
+	}
 	
 	// Constructor clase abstracta
 	public Atraccion(String nombre, int cupoMaximo, int empleadosEncargados, boolean disponibleClima, String nivelExclusividad) {
@@ -49,11 +56,6 @@ public abstract class Atraccion {
 		this.empleadosEncargados = empleadosEncargados;
 		this.disponibleClima = disponibleClima;
 		this.nivelExclusividad = nivelExclusividad;
-	}
-	
-	public void aptaParaCliente(int edadUsuario) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

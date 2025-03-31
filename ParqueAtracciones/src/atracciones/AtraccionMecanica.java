@@ -1,11 +1,18 @@
 package atracciones;
 
+import java.util.Set;
+import java.util.HashSet;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+
 public class AtraccionMecanica extends Atraccion{
 	
 	private int minimoAltura;
 	private int maximoAltura;
 	private int minimoPeso;
 	private int maximoPeso;
+	// Cadena de restricciones separadas por coma, A,B,C,D
 	private String restriccionesSalud;
 	private String nivelRiesgo;
 	
@@ -72,9 +79,48 @@ public class AtraccionMecanica extends Atraccion{
 		this.nivelRiesgo = nivelRiesgo;
 	}
 
-	@Override
-	public void aptaParaCliente() {
-		
-	}
+	private boolean respuesta;
+
+    public void aptaParaCliente(int alturaUsuario, int pesoUsuario, String restriccionesUsuario) {
+        int minPeso = getMinimoPeso();
+        int maxPeso = getMaximoPeso();
+        int minAltura = getMinimoAltura();
+        int maxAltura = getMaximoAltura();
+
+        boolean cumplePesoAltura = minPeso < pesoUsuario && pesoUsuario < maxPeso &&
+                                   minAltura < alturaUsuario && alturaUsuario < maxAltura;
+
+        boolean tieneRestriccion = tieneRestriccion(restriccionesUsuario);
+
+        if (cumplePesoAltura && !tieneRestriccion) {
+            respuesta = true;
+        } else {
+            respuesta = false;
+        }
+    }
+
+    private boolean tieneRestriccion(String restriccionesUsuario) {
+        // Convierte las restricciones de la atracción en un Set para una busqueda rapida
+        Set<String> restriccionesAtraccion = new HashSet<>(Arrays.asList(getRestriccionesSalud().split(",")));
+
+        // Divide las restricciones del usuario y verifica si alguna está en la lista de la atraccion
+        for (String restriccion : restriccionesUsuario.split(",")) {
+            if (restriccionesAtraccion.contains(restriccion.trim())) {
+                return true; // Se encontró una restricción en comun
+            }
+        }
+        return false;
+    }
+
+    public boolean isRespuesta() {
+        return respuesta;
+    }
+    
+    // Comparamos la fecha de hoy para saber si el espectaculo se encuentra disponible
+	
+ 	public boolean estaDisponible(Temporada temporada) {
+ 	    LocalDateTime fechaActual = LocalDateTime.now();
+ 	    return fechaActual.isAfter(temporada.getFechaInicio()) && fechaActual.isBefore(temporada.getFechaFin());
+ 	}
 	
 }

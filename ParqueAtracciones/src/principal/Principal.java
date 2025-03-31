@@ -51,7 +51,19 @@ public class Principal {
 					
 					// Criterios de una atraccion Mecanica
 					else if(tipoAtraccion==1) {
-					
+						System.out.println("Ingrese el peso del usuario: ");
+						int pesoUsr = Integer.parseInt(leerConsola());
+						System.out.println("Ingrese la altura del usuario: ");
+						int altUsr = Integer.parseInt(leerConsola());
+						System.out.println("Ingrese las restricciones de salud del usuario: ");
+						String restrUsr = leerConsola();
+						atraccionMecanica.aptaParaCliente(altUsr, pesoUsr, restrUsr);
+						if (atraccionMecanica.isRespuesta()==false) {
+							System.out.println("El usuario dado no cumple con los requisitos para entrar a la atraccion");
+						}
+						else if (atraccionMecanica.isRespuesta()==true) {
+							System.out.println("El usuario dado puede ingresar a la atraccion");
+						}
 					}
 					
 					// Criterios de una atraccion cultural
@@ -79,23 +91,38 @@ public class Principal {
 					int u = Integer.parseInt(leerConsola());
 					if (u==0) {
 						op=0;
-						
+					
+					// Estado Atraccion Mecanica
 					}else if (u==1) {
+						boolean condicion= atraccionMecanica.estaDisponible(temporada);
+						if (condicion == true) {
+							System.out.println("La atraccion mecanica se encuentra disponible");
+						}
+						else if (condicion == false) {
+							System.out.println("La atraccion mecanica no se encuentra disponible");
+						}
 						
+					// Estado Atraccion Cultural
 					}else if (u==2) {
+						boolean condicion= atraccionCultural.estaDisponible(temporada);
+						if (condicion == true) {
+							System.out.println("La atraccion cultural se encuentra disponible");
+						}
+						else if (condicion == false) {
+							System.out.println("La atraccion cultural no se encuentra disponible");
+						}
 						
+					// Estado Espectaculo
 					}else if (u==3) {
 						boolean condicion= espectaculo.estaDisponible(temporada);
 						if (condicion == true) {
-							System.out.println("La atraccion se encuentra disponible");
+							System.out.println("El espectaculo se va a realizar");
 						}
 						else if (condicion == false) {
-							System.out.println("La atraccion no se encuentra disponible");
+							System.out.println("El espectaculo no se va a realizar");
 						}
 					}
 				}
-
-
 			}
 			
 			// Consultas relacionadas con los usuarios del parque
