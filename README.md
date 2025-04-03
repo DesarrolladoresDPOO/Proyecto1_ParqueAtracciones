@@ -27,30 +27,31 @@ Las funcionalidades clave incluyen:
 - Compra de **FastPass** para acceso rápido a atracciones.  
 - Registro de uso de tiquetes para evitar fraudes.
 
-- ## Estructura del Proyecto
-- 📦 src/
-├── 📁 principal/
-│   └── 📄 Principal.java 
-├── 📁 atracciones/
-│   ├── 📄 Atraccion.java
-│   ├── 📄 AtraccionCultural.java
-│   ├── 📄 AtraccionMecanica.java 
-│   ├── 📄 Espectaculo.java
-│   ├── 📄 Temporada.java 
-│   └── 📄 Ubicacion.java 
-├── 📁 tiquetes/
-│   ├── 📄 Tiquete.java
-│   ├── 📄 TiqueteBasico.java
-│   ├── 📄 TiqueteFamiliar.java
-│   └── 📄 (Otras clases de tiquetes Oro, Diamante, etc.)
-├── 📁 empleados/
-│   ├── 📄 Empleado.java
-│   ├── 📄 Administrador.java 
-│   ├── 📄 Cajero.java
-│   └── 📄 (Otros roles: Cocinero, OperadorMecánico, etc.)
-├── 📁 tests/
-│   └── 📄 AtraccionTest.java
-
+## 📂 Estructura del Proyecto  
+```bash
+src/
+├── principal/
+│   └── Principal.java  
+├── atracciones/
+│   ├── Atraccion.java
+│   ├── AtraccionCultural.java
+│   ├── AtraccionMecanica.java
+│   ├── Espectaculo.java 
+│   ├── Temporada.java 
+│   └── Ubicacion.java 
+├── tiquetes/
+│   ├── Tiquete.java 
+│   ├── TiqueteBasico.java 
+│   ├── TiqueteFamiliar.java
+│   └── (Otras clases de tiquetes Oro, Diamante, etc.)
+├── empleados/
+│   ├── Empleado.java
+│   ├── Administrador.java
+│   ├── Cajero.java      
+│   └── (Otros roles: Cocinero, OperadorMecánico, etc.)
+├── tests/
+│   └── AtraccionTest.java 
+```
 ## Funcionalidades Destacadas
 
 ✅ Consultar requisitos de atracciones:
@@ -74,5 +75,5 @@ El archivo AtraccionTest.java incluye pruebas para:
 - Espectáculos: Disponibilidad según fechas de temporada.
 
 Ejemplo de salida:
-Prueba Mecanica 1 - No cumple con la altura mínima, esperada (false), dada: false  
-Prueba Cultural 2 - Cumple con la edad mínima, esperada (true), dada: true  
+- Prueba Mecanica 1 - No cumple con la altura mínima, esperada (false), dada: false  
+- Prueba Cultural 2 - Cumple con la edad mínima, esperada (true), dada: true  
