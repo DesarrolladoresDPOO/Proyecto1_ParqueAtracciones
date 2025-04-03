@@ -1,12 +1,11 @@
 package atracciones;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Espectaculo {
 	
 	public String nombre;
-	public Date fechaDisponible;
+	public Temporada temporada;
 	public String horarios;
 	public boolean fijaTemporada;
 	
@@ -17,12 +16,6 @@ public class Espectaculo {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public Date getFechaDisponible() {
-		return fechaDisponible;
-	}
-	public void setFechaDisponible(Date fechaDisponible) {
-		this.fechaDisponible = fechaDisponible;
 	}
 	public String getHorarios() {
 		return horarios;
@@ -36,21 +29,27 @@ public class Espectaculo {
 	public void setFijaTemporada(boolean fijaTemporada) {
 		this.fijaTemporada = fijaTemporada;
 	}
+	public Temporada getTemporada() {
+		return temporada;
+	}
+	public void setTemporada(Temporada temporada) {
+		this.temporada = temporada;
+	}
 	
 	// Constructor
-	
-	public Espectaculo(String nombre, Date fechaDisponible, String horarios, boolean fijaTemporada) {
+
+	public Espectaculo(String nombre, Temporada temporada, String horarios, boolean fijaTemporada) {
 		this.nombre = nombre;
-		this.fechaDisponible = fechaDisponible;
+		this.temporada = temporada;
 		this.horarios = horarios;
 		this.fijaTemporada = fijaTemporada;
 	}
 	
 	// Comparamos la fecha de hoy para saber si el espectaculo se encuentra disponible
 	
-	public boolean estaDisponible(Temporada temporada) {
+	public boolean estaDisponible() {
 	    LocalDateTime fechaActual = LocalDateTime.now();
-	    return fechaActual.isAfter(temporada.getFechaInicio()) && fechaActual.isBefore(temporada.getFechaFin());
+	    return fechaActual.isAfter(getTemporada().getFechaInicio()) && fechaActual.isBefore(getTemporada().getFechaFin());
 	}
 	
 }

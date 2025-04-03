@@ -114,7 +114,7 @@ public class Principal {
 						
 					// Estado Espectaculo
 					}else if (u==3) {
-						boolean condicion= espectaculo.estaDisponible(temporada);
+						boolean condicion= espectaculo.estaDisponible();
 						if (condicion == true) {
 							System.out.println("El espectaculo se va a realizar");
 						}

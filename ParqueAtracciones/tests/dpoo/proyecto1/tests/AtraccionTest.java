@@ -3,7 +3,6 @@ package dpoo.proyecto1.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +19,7 @@ public class AtraccionTest
     private AtraccionMecanica a1;
     private AtraccionCultural a2;
     private Espectaculo e1;
+    private Espectaculo e2;
     private Temporada t1;
     private Temporada t2;
 
@@ -32,17 +32,17 @@ public class AtraccionTest
         a2 = new AtraccionCultural("PalacioEspejos", 20, 2, true, "familiar", 9);
         // nombre, cupo maximo, empleados encargados, disponible clima, nivel exclusividad, edad min
         
-        @SuppressWarnings("deprecation")
-		Date fecha = new Date(2024 - 1900, 7 - 1, 15);
-        e1= new Espectaculo("Desfile", fecha, "18:00 - 21:00", false);
-        
-        LocalDateTime inicio1 = LocalDateTime.of(2024, 1, 10, 12, 00); // 10 de enero de 2024, 12:00
-        LocalDateTime fin1 = LocalDateTime.of(2024, 4, 10, 12, 00); // 10 de abril de 2024, 12:00
+        LocalDateTime inicio1 = LocalDateTime.of(2025, 1, 10, 12, 00); // 10 de enero de 2025, 12:00
+        LocalDateTime fin1 = LocalDateTime.of(2025, 3, 1, 12, 00); // 1 de marzo de 2025, 12:00
         t1= new Temporada(inicio1, fin1);
         
-        LocalDateTime inicio2 = LocalDateTime.of(2024, 1, 10, 12, 00); // 10 de enero de 2024, 12:00
+        e1= new Espectaculo("DesfileInvierno", t1, "18:00 - 21:00", false);
+        
+        LocalDateTime inicio2 = LocalDateTime.of(2025, 1, 10, 12, 00); // 10 de enero de 2025, 12:00
         LocalDateTime fin2 = LocalDateTime.of(2026, 4, 10, 12, 00); // 10 de abril de 2026, 12:00
         t2= new Temporada(inicio2, fin2);
+        
+        e2= new Espectaculo("DesfileSiempre", t2, "18:00 - 21:00", false);
     }
 
     @AfterEach
@@ -85,11 +85,11 @@ public class AtraccionTest
     @Test
     void testEspectaculo( )
     {
-    	System.out.println("Prueba Espectaculo - El espectaculo NO esta disponible, esperada (false), dada: " + e1.estaDisponible(t1));
-        assertEquals(false, e1.estaDisponible(t1), "El espectaculo no esta disponible" );
+    	System.out.println("Prueba Espectaculo - El espectaculo NO esta disponible, esperada (false), dada: " + e1.estaDisponible());
+        assertEquals(false, e1.estaDisponible(), "El espectaculo no esta disponible" );
         
-        System.out.println("Prueba Espectaculo - El espectaculo SI esta disponible, esperada (true), dada: " + e1.estaDisponible(t2));
-        assertEquals(true, e1.estaDisponible(t2), "El espectaculo no esta disponible" );
+        System.out.println("Prueba Espectaculo - El espectaculo SI esta disponible, esperada (true), dada: " + e2.estaDisponible());
+        assertEquals(true, e2.estaDisponible(), "El espectaculo no esta disponible" );
     }
     
 }
