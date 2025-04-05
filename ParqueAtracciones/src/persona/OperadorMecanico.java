@@ -3,13 +3,15 @@ package persona;
 import java.util.ArrayList;
 import java.util.List;
 
+import atracciones.AtraccionMecanica;
+
 public class OperadorMecanico extends Empleado {
 
     private List<AtraccionMecanica> atraccionesCapacitadas;
 
-    public OperadorMecanico(String login, String password, String nombre, int id, String lugarTrabajo, boolean capacitacionInicial, AtraccionMecanica atraccionInicial) {
-        super(login, password, nombre, id, lugarTrabajo);
-        atraccionesCapacitadas = new ArrayList<>();
+    public OperadorMecanico(String login, String password, String nombre, int Id, String lugarTrabajo, boolean capacitacionInicial, AtraccionMecanica atraccionInicial) {
+        super(login, password, nombre, Id);
+        this.atraccionesCapacitadas = new ArrayList<>();
         
         // Si se indica que tiene una capacitación inicial, la agregamos
         if (capacitacionInicial && atraccionInicial != null) {
@@ -26,4 +28,5 @@ public class OperadorMecanico extends Empleado {
     public boolean puedeOperar(AtraccionMecanica atraccion) {
         return atraccionesCapacitadas.contains(atraccion);
     }
+    
 }

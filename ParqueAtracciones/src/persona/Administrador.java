@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Administrador extends Empleado {
 
     public Administrador(String login, String password, String nombre, int Id) {
-        super(login, password, nombre, Id, "Oficina");
+        super(login, password, nombre, Id);
     }
 
     //  Método para asignar un turno a otro empleado

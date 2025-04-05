@@ -2,7 +2,7 @@ package tiquetes;
 
 import java.util.ArrayList;
 import java.util.List;
-import empleados.Cajero;
+import persona.Cajero;
 
 public class Taquilla {
 
@@ -23,4 +23,9 @@ public class Taquilla {
     public void asignarCajero(Cajero cajero) {
         cajeros.add(cajero);
     }
+
+	public boolean registrarVenta(String producto, double valor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -1,5 +1,7 @@
 package persona;
 
+import tiquetes.Taquilla;
+
 public class Cajero extends Empleado {
 	private boolean Capacitacion;
 

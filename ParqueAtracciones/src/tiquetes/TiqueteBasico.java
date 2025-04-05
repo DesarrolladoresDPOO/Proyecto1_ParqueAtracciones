@@ -6,3 +6,4 @@ public class TiqueteBasico extends Tiquete {
     public TiqueteBasico(boolean fastPass) {
         super("Basico", fastPass);
     }
+}

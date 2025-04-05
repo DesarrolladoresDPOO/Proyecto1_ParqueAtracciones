@@ -20,5 +20,4 @@ public class Cocinero extends Empleado {
 		System.out.println("Comida preparada");
 		
 	}
-
 }
