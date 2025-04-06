@@ -24,8 +24,10 @@ public class Taquilla {
         cajeros.add(cajero);
     }
 
-	public boolean registrarVenta(String producto, double valor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean registrarVenta(String producto, double valor) {
+        if (cajeros.isEmpty()) {
+            return false;
+        }
+        return cajero.registrarVenta(producto, valor);
+    }
 }

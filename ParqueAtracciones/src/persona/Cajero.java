@@ -1,6 +1,8 @@
 package persona;
 
-import tiquetes.Taquilla;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Cajero extends Empleado {
 	private boolean Capacitacion;
@@ -17,10 +19,12 @@ public class Cajero extends Empleado {
 	public void setCapacitacion(Boolean capacitado) {
 		this.Capacitacion = capacitado;
 	}
-    public boolean registrarVenta(Taquilla taquilla, String producto, double valor) {
-        if (taquilla != null) {
-            return taquilla.registrarVenta(producto, valor);
-        }
-        return false;
-    }
+	
+	private List<String> ventas = new ArrayList<>();
+
+	public boolean registrarVenta(String producto, double valor) {
+	    ventas.add("Producto: " + producto + ", Valor: " + valor);
+	    return true;
+	}
+
 }
