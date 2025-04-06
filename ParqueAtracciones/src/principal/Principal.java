@@ -3,11 +3,24 @@ package principal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 
+import atracciones.Atraccion;
 import atracciones.AtraccionCultural;
 import atracciones.AtraccionMecanica;
 import atracciones.Espectaculo;
 import atracciones.Temporada;
+import persona.Empleado;
+import persona.Cajero;
+import persona.Turno;
+import tiquetes.Cliente;
+import tiquetes.Tiquete;
+import tiquetes.TiqueteOro;
+import tiquetes.TiqueteBasico;
+import tiquetes.TiqueteFamiliar;
+import tiquetes.TiqueteDiamante;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Principal {
 	private BufferedReader br;
@@ -15,6 +28,8 @@ public class Principal {
 	private AtraccionMecanica atraccionMecanica;
 	private Espectaculo espectaculo;
 	private Temporada temporada;
+	private List<Empleado> empleados;
+	private List<Cliente> clientes;
 
 	public Principal() {
 		this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -126,13 +141,155 @@ public class Principal {
 			}
 			
 			// Consultas relacionadas con los usuarios del parque
-			else if (op==2) {
+			else if (op == 2) {
+				System.out.println("Ingrese el tipo de usuario:");
+				System.out.println("1. Empleado");
+				System.out.println("2. Cliente");
+				int tipoUsuario = Integer.parseInt(leerConsola());
 
+				if (tipoUsuario == 1) {
+					System.out.println("Ingrese el nombre del empleado:");
+					String nombre = leerConsola();
+					boolean encontrado = false;
+					for (Empleado e : empleados) {
+						if (e.getNombre().equalsIgnoreCase(nombre)) {
+							encontrado = true;
+							System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+							String fechaTexto = leerConsola();
+							LocalDate fecha = LocalDate.parse(fechaTexto);
+							Turno turno = e.consultarTurno(fecha);
+							if (turno != null) {
+								System.out.println("Turno para " + fecha + ": " + turno);
+								System.out.println("Lugar de trabajo: " + e.getLugarTrabajo());
+							} else {
+								System.out.println("No tiene turno asignado para esa fecha.");
+							}
+							break;
+						}
+					}
+					if (!encontrado) {
+						System.out.println("Empleado no encontrado.");
+					}
+				}
+				else if (tipoUsuario == 2) {
+					System.out.println("Ingrese el nombre del cliente:");
+					String nombreCliente = leerConsola();
+					boolean encontrado = false;
+					for (Cliente c : clientes) {
+						if (c.getNombre().equalsIgnoreCase(nombreCliente)) {
+							encontrado = true;
+							System.out.println("Tiquetes del cliente:");
+							for (Tiquete t : c.getTiquetes()) {
+								System.out.println("- Tipo: " + t.getTipo() + ", Usado: " + (t.isUsado() ? "Sí" : "No"));
+							}
+							break;
+						}
+					}
+					if (!encontrado) {
+						System.out.println("Cliente no encontrado.");
+					}
+				}
 			}
 			
 			// Consultas relacionadas con el sistema de tiquetes
-			else if (op==3) {
+			else if (op == 3) {
+				System.out.println("Menú de consulta de tiquetes");
+				System.out.println("1. Ver todos los clientes registrados");
+				System.out.println("2. Ver tiquetes de un cliente específico");
+				int subop = Integer.parseInt(leerConsola());
 
+				if (subop == 1) {
+					if (clientes.isEmpty()) {
+						System.out.println("No hay clientes registrados.");
+					} else {
+						System.out.println("Clientes registrados:");
+						for (Cliente c : clientes) {
+							System.out.println("- " + c.getNombre());
+						}
+					}
+				} else if (subop == 2) {
+					System.out.println("Ingrese el nombre del cliente:");
+					String nombreCliente = leerConsola();
+					boolean encontrado = false;
+					for (Cliente c : clientes) {
+						if (c.getNombre().equalsIgnoreCase(nombreCliente)) {
+							encontrado = true;
+							List<Tiquete> tiquetes = c.getTiquetes();
+							if (tiquetes.isEmpty()) {
+								System.out.println("Este cliente no tiene tiquetes.");
+							} else {
+								System.out.println("Tiquetes de " + c.getNombre() + ":");
+								for (Tiquete t : tiquetes) {
+									System.out.println("- Tipo: " + t.getTipo() + ", Usado: " + (t.isUsado() ? "Sí" : "No"));
+								}
+							}
+							break;
+						}
+					}
+					if (!encontrado) {
+						System.out.println("Cliente no encontrado.");
+					}
+				} else {
+					System.out.println("Opción no válida.");
+				}
+			}
+			else if (op == 4) {
+				System.out.println("Ingrese el nombre del cliente que desea comprar un tiquete:");
+				String nombreCliente = leerConsola();
+
+				Cliente clienteEncontrado = null;
+				for (Cliente c : clientes) {
+					if (c.getNombre().equalsIgnoreCase(nombreCliente)) {
+						clienteEncontrado = c;
+						break;
+					}
+				}
+
+				if (clienteEncontrado == null) {
+					System.out.println("Cliente no encontrado. ¿Desea registrarlo? (s/n)");
+					String respuesta = leerConsola();
+					if (respuesta.equalsIgnoreCase("s")) {
+						System.out.println("Ingrese login:");
+						String login = leerConsola();
+						System.out.println("Ingrese contraseña:");
+						String password = leerConsola();
+						clienteEncontrado = new Cliente(nombreCliente);
+						clientes.add(clienteEncontrado);
+						System.out.println("Cliente registrado exitosamente.");
+					} else {
+						System.out.println("Venta cancelada.");
+						return;
+					}
+				}
+
+				System.out.println("¿Desea agregar FastPass? (s/n)");
+				boolean fastPass = leerConsola().equalsIgnoreCase("s");
+
+				System.out.println("Seleccione el tipo de tiquete a comprar:");
+				System.out.println("1. Básico");
+				System.out.println("2. Familiar");
+				System.out.println("3. Oro");
+				System.out.println("4. Diamante");
+
+				int tipo = Integer.parseInt(leerConsola());
+				Tiquete nuevo = null;
+				List<Atraccion> atraccionesVacias = new ArrayList<Atraccion>(); // Simulación por ahora
+
+				if (tipo == 1) {
+					nuevo = new TiqueteBasico(fastPass);
+				} else if (tipo == 2) {
+					nuevo = new TiqueteFamiliar(atraccionesVacias, fastPass);
+				} else if (tipo == 3) {
+					nuevo = new TiqueteOro(atraccionesVacias, fastPass);
+				} else if (tipo == 4) {
+					nuevo = new TiqueteDiamante(atraccionesVacias, fastPass);
+				} else {
+					System.out.println("Tipo de tiquete inválido.");
+					return;
+				}
+
+				clienteEncontrado.usarTiquete(nuevo);
+				System.out.println("Tiquete agregado exitosamente al cliente " + clienteEncontrado.getNombre());
 			}
 
 		}while(op != 0);
