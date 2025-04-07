@@ -50,6 +50,7 @@ public class Principal {
 	private Turno turnoDiurno;
 	private Turno turnoNocturno;
 	private Cliente cliente;
+	private Cliente cliente2;
 	private EntradaIndividual entradaIndividual;
 	private Taquilla taquilla;
 	private Tiquete tiquete;
@@ -63,7 +64,9 @@ public class Principal {
 	private List<Empleado> empleados;
 	private List<Cliente> clientes;
 	private List<Tiquete> tiquetes;
+	private List<Tiquete> tiquetes2;
 	private List<Atraccion> atraccionesDiamante;
+	private List<Atraccion> atraccionesFamiliares;
 
 	public Principal() {
 
@@ -119,9 +122,20 @@ public class Principal {
 		tiquetes= new ArrayList<Tiquete>();
 		tiquetes.add(tiqueteDiamante);
 		
-		cliente= new Cliente("Felipe1", "123", "Felipe Garcia", tiquetes);
 		clientes= new ArrayList<Cliente>();
+		cliente= new Cliente("Felipe1", "123", "Felipe Garcia", tiquetes);
 		clientes.add(cliente);
+		
+		atraccionesFamiliares = new ArrayList<Atraccion>();
+		atraccionesFamiliares.add(atraccionCultural);
+		
+		tiqueteFamiliar= new TiqueteFamiliar(atraccionesFamiliares, true);
+		tiquetes2= new ArrayList<Tiquete>();
+		tiquetes2.add(tiqueteDiamante);
+		tiquetes2.add(tiqueteFamiliar);
+		
+		cliente2= new Cliente("Juan05", "123", "Juan Jimenez", tiquetes2);
+		clientes.add(cliente2);
 		
 		
 
@@ -132,7 +146,7 @@ public class Principal {
 		// Inciamos el menu principal de la aplicacion
 		do {
 			System.out.println("Digite:\n" + "0. Salir\n" + "1. Consultar requisito atraccion\n"
-					+ "2. Consultar usuario\n" + "3. Consultar tiquetes");
+					+ "2. Consultar usuario\n" + "3. Consultar tiquetes\n"+ "4. Comprar tiquetes");
 			op = Integer.parseInt(leerConsola());
 
 			// Consultas relacionadas con las atracciones del parque
@@ -334,6 +348,7 @@ public class Principal {
 					System.out.println("Opción no válida.");
 				}
 			} else if (op == 4) {
+				ArrayList<Tiquete> tiqueteCliente = new ArrayList<Tiquete>();
 				System.out.println("Ingrese el nombre del cliente que desea comprar un tiquete:");
 				String nombreCliente = leerConsola();
 
@@ -353,7 +368,7 @@ public class Principal {
 						String login = leerConsola();
 						System.out.println("Ingrese contraseña:");
 						String password = leerConsola();
-						clienteEncontrado = new Cliente(login, password, nombreCliente, null);
+						clienteEncontrado = new Cliente(login, password, nombreCliente, tiqueteCliente);
 						clientes.add(clienteEncontrado);
 						System.out.println("Cliente registrado exitosamente.");
 					} else {
@@ -372,23 +387,27 @@ public class Principal {
 				System.out.println("4. Diamante");
 
 				int tipo = Integer.parseInt(leerConsola());
-				Tiquete nuevo = null;
 				List<Atraccion> atraccionesVacias = new ArrayList<Atraccion>(); // Simulación por ahora
-
+				Tiquete nuevo;
 				if (tipo == 1) {
 					nuevo = new TiqueteBasico(fastPass);
+					tiqueteCliente.add(nuevo);
 				} else if (tipo == 2) {
 					nuevo = new TiqueteFamiliar(atraccionesVacias, fastPass);
+					tiqueteCliente.add(nuevo);
 				} else if (tipo == 3) {
 					nuevo = new TiqueteOro(atraccionesVacias, fastPass);
+					tiqueteCliente.add(nuevo);
 				} else if (tipo == 4) {
 					nuevo = new TiqueteDiamante(atraccionesVacias, fastPass);
+					tiqueteCliente.add(nuevo);
 				} else {
 					System.out.println("Tipo de tiquete inválido.");
 					return;
 				}
+				
 
-				clienteEncontrado.usarTiquete(nuevo);
+				// clienteEncontrado.usarTiquete(nuevo);
 				System.out.println("Tiquete agregado exitosamente al cliente " + clienteEncontrado.getNombre());
 			}
 
