@@ -3,10 +3,11 @@ package persona;
 public class Cocinero extends Empleado {
 	private boolean Capacitacion;
 
-	public Cocinero(String login, String password, String nombre, int Id,String lugarTrabajo, boolean capacitacion) {
-		super(login, password, nombre, Id);
-		this.Capacitacion = capacitacion;
+	public Cocinero(String login, String password, String nombre, int Id, String lugarTrabajo, Turno turno, boolean capacitacion) {
+		super(login, password, nombre, Id, lugarTrabajo, turno);
+		Capacitacion = capacitacion;
 	}
+	
 	public Boolean getCapacitacion() {
 		return Capacitacion;
 	}

@@ -10,12 +10,16 @@ public abstract class Empleado extends Usuario {
 	private int Id;
 	private Map<LocalDate, Turno> turnosAsignados = new HashMap<>();
 	private String lugarTrabajo;
+	public Turno turno;
 
 	//Constructor
-	public Empleado(String login, String password, String nombre, int Id) {
+	
+	public Empleado(String login, String password, String nombre, int Id, String lugarTrabajo, Turno turno) {
 		super(login, password);
 		this.nombre = nombre;
 		this.Id = Id;
+		this.lugarTrabajo = lugarTrabajo;
+		this.turno = turno;
 	}
 
 	// Getters y setters
@@ -33,6 +37,14 @@ public abstract class Empleado extends Usuario {
 
 	public void setId(int Id) {
 		this.Id = Id;
+	}
+	
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 
 	// Metodos para turnos

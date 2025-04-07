@@ -1,18 +1,20 @@
 package persona;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Turno {
     private String tipo; // "Diurno" o "Nocturno"
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
+    private LocalDateTime horaInicio;
+    private LocalDateTime horaFin;
 
-    public Turno(String tipo, LocalTime horaInicio, LocalTime horaFin) {
+    // Constructor
+    public Turno(String tipo, LocalDateTime horaInicio, LocalDateTime horaFin) {
         this.tipo = tipo;
         this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+        this.horaFin = horaFin; 
     }
-
+    
+    // Getters y setters
     public String getTipo() {
         return tipo;
     }
@@ -21,19 +23,19 @@ public class Turno {
         this.tipo = tipo;
     }
 
-    public LocalTime getHoraInicio() {
+    public LocalDateTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) {
+    public void setHoraInicio(LocalDateTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public LocalTime getHoraFin() {
+    public LocalDateTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(LocalTime horaFin) {
+    public void setHoraFin(LocalDateTime horaFin) {
         this.horaFin = horaFin;
     }
 

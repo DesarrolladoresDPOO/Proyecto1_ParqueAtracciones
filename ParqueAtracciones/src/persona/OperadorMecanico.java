@@ -9,8 +9,8 @@ public class OperadorMecanico extends Empleado {
 
     private List<AtraccionMecanica> atraccionesCapacitadas;
 
-    public OperadorMecanico(String login, String password, String nombre, int Id, String lugarTrabajo, boolean capacitacionInicial, AtraccionMecanica atraccionInicial) {
-        super(login, password, nombre, Id);
+    public OperadorMecanico(String login, String password, String nombre, int Id, String lugarTrabajo, boolean capacitacionInicial, AtraccionMecanica atraccionInicial, Turno turno) {
+    	super(login, password, nombre, Id, lugarTrabajo, turno);
         this.atraccionesCapacitadas = new ArrayList<>();
         
         // Si se indica que tiene una capacitación inicial, la agregamos
