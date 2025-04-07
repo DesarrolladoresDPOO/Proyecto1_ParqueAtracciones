@@ -4,14 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import atracciones.Atraccion;
 import atracciones.AtraccionCultural;
 import atracciones.AtraccionMecanica;
 import atracciones.Espectaculo;
 import atracciones.Temporada;
+import persona.Administrador;
+import persona.Cajero;
+import persona.Cocinero;
 import persona.Empleado;
+import persona.LugarServicio;
+import persona.LugarTrabajo;
+import persona.OperadorMecanico;
+import persona.ServicioGeneral;
 import persona.Turno;
+import persona.Usuario;
 import tiquetes.Cliente;
 import tiquetes.Tiquete;
 import tiquetes.TiqueteOro;
@@ -27,6 +37,18 @@ public class Principal {
 	private AtraccionMecanica atraccionMecanica;
 	private Espectaculo espectaculo;
 	private Temporada temporada;
+	private Administrador administrador;
+	private Cajero cajero;
+	private Cocinero cocinero;
+	private Empleado empleado;
+	private LugarServicio lugarServicio;
+	private LugarTrabajo lugarTrabajo;
+	private OperadorMecanico operadorMecanico;
+	private ServicioGeneral servicioGeneral;
+	private Turno turno;
+	private Usuario usuario;
+	
+	
 	private List<Empleado> empleados;
 	private List<Cliente> clientes;
 
@@ -34,8 +56,28 @@ public class Principal {
 		
 		// Creamos una instancia de todas las clases para probarlas
 		atraccionCultural= new AtraccionCultural("Carrusel", 20, 2, true, "familiar", 5);
-		atraccionMecanica= new AtraccionMecanica(null, 0, 0, false, null, 0, 0, 0, 0, null, null);
-		
+		atraccionMecanica= new AtraccionMecanica("MontanaRusa", 10, 4, true, "oro", 150, 190, 40, 90, "vertigo", "medio");
+		LocalDateTime inicio1 = LocalDateTime.of(2025, 1, 10, 12, 00); // 10 de enero de 2025, 12:00
+        LocalDateTime fin1 = LocalDateTime.of(2025, 3, 1, 12, 00); // 1 de marzo de 2025, 12:00
+        temporada = new Temporada(inicio1, fin1);
+        espectaculo = new Espectaculo("DesfileInvierno", temporada, "18:00 - 21:00", false);
+        
+        administrador = new Administrador("Juan123", "123", "Juan Carlos", 100);
+        cajero= new Cajero("Pablo15", "123", "Pablo Mancera", 200, "taquilla", true);
+        cocinero= new Cocinero("Paola25", "123", "Paola Suarez", 300, "cocina", true);
+        lugarServicio= new LugarServicio("cocina");
+        operadorMecanico= new OperadorMecanico("JuanPablo1", "123", "Juan Pablo Correa", 400, "MontanaRusa", true, atraccionMecanica);
+        servicioGeneral= new ServicioGeneral("Ernesto1", "123", "Ernesto Lopez", 500, "baños");
+        turno= new Turno("Apertura", LocalTime.of(8, 0), LocalTime.of(14, 0));
+        
+        empleados = new ArrayList<Empleado>();
+        empleados.add(administrador);
+        empleados.add(cajero);
+        empleados.add(cocinero);
+        empleados.add(operadorMecanico);
+        empleados.add(servicioGeneral);
+        
+		// Activamos el Buffer Reader para leer informacion de la consola
 		this.br = new BufferedReader(new InputStreamReader(System.in));
 		int op;
 
