@@ -11,7 +11,6 @@ import atracciones.AtraccionMecanica;
 import atracciones.Espectaculo;
 import atracciones.Temporada;
 import persona.Empleado;
-import persona.Cajero;
 import persona.Turno;
 import tiquetes.Cliente;
 import tiquetes.Tiquete;
@@ -32,6 +31,11 @@ public class Principal {
 	private List<Cliente> clientes;
 
 	public Principal() {
+		
+		// Creamos una instancia de todas las clases para probarlas
+		atraccionCultural= new AtraccionCultural(null, 0, 0, false, null, 0);
+		atraccionMecanica= new AtraccionMecanica(null, 0, 0, false, null, 0, 0, 0, 0, null, null);
+		
 		this.br = new BufferedReader(new InputStreamReader(System.in));
 		int op;
 
@@ -253,7 +257,7 @@ public class Principal {
 						String login = leerConsola();
 						System.out.println("Ingrese contraseña:");
 						String password = leerConsola();
-						clienteEncontrado = new Cliente(nombreCliente);
+						clienteEncontrado = new Cliente(login, password, nombreCliente, null);
 						clientes.add(clienteEncontrado);
 						System.out.println("Cliente registrado exitosamente.");
 					} else {

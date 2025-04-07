@@ -8,6 +8,7 @@ public class Taquilla {
 
     // Atributo
     private List<Cajero> cajeros;
+    private List<String> ventas = new ArrayList<>();
 
     // Constructor
     public Taquilla(List<Cajero> cajerosIniciales) {
@@ -18,16 +19,25 @@ public class Taquilla {
     public List<Cajero> getCajeros() {
         return cajeros;
     }
+    
+    public List<String> getVentas() {
+		return ventas;
+	}
 
-    // Método para asignar un nuevo cajero
+	public void setVentas(List<String> ventas) {
+		this.ventas = ventas;
+	}
+
+	public void setCajeros(List<Cajero> cajeros) {
+		this.cajeros = cajeros;
+	}
+
+	// Métodos
     public void asignarCajero(Cajero cajero) {
         cajeros.add(cajero);
     }
 
-    public boolean registrarVenta(String producto, double valor) {
-        if (cajeros.isEmpty()) {
-            return false;
-        }
-        return cajero.registrarVenta(producto, valor);
-    }
+	public void registrarVenta(String producto, double valor) {
+	    ventas.add("Producto: " + producto + ", Valor: " + valor);
+	}
 }

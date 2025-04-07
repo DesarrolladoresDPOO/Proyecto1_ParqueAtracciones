@@ -1,21 +1,23 @@
 package tiquetes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente {
+import persona.Usuario;
+
+public class Cliente extends Usuario{
 
     // Atributos
     private String nombre;
     private List<Tiquete> tiquetes;
 
     // Constructor
-    public Cliente(String nombre) {
-        this.nombre = nombre;
-        this.tiquetes = new ArrayList<Tiquete>();
-    }
+    public Cliente(String login, String password, String nombre, List<Tiquete> tiquetes) {
+		super(login, password);
+		this.nombre = nombre;
+		this.tiquetes = tiquetes;
+	}
 
-    // Getter del nombre
+	// Getter del nombre
     public String getNombre() {
         return nombre;
     }
