@@ -14,8 +14,13 @@ public class TiqueteDiamante extends Tiquete {
         this.atraccionesDiamante = atraccionesDiamante;
     }
 
-    // Getter
+    // Getters y setters
     public List<Atraccion> getAtraccionesDiamante() {
         return atraccionesDiamante;
     }
+
+	public void setAtraccionesDiamante(List<Atraccion> atraccionesDiamante) {
+		this.atraccionesDiamante = atraccionesDiamante;
+	}
+    
 }

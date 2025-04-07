@@ -23,8 +23,12 @@ import persona.ServicioGeneral;
 import persona.Turno;
 import persona.Usuario;
 import tiquetes.Cliente;
+import tiquetes.EntradaIndividual;
+import tiquetes.Taquilla;
 import tiquetes.Tiquete;
 import tiquetes.TiqueteOro;
+import tiquetes.TiqueteTemporada;
+import tiquetes.VentaOnline;
 import tiquetes.TiqueteBasico;
 import tiquetes.TiqueteFamiliar;
 import tiquetes.TiqueteDiamante;
@@ -45,9 +49,21 @@ public class Principal {
 	private ServicioGeneral servicioGeneral;
 	private Turno turnoDiurno;
 	private Turno turnoNocturno;
+	private Cliente cliente;
+	private EntradaIndividual entradaIndividual;
+	private Taquilla taquilla;
+	private Tiquete tiquete;
+	private TiqueteBasico tiqueteBasico;
+	private TiqueteDiamante tiqueteDiamante;
+	private TiqueteFamiliar tiqueteFamiliar;
+	private TiqueteOro tiqueteOro;
+	private TiqueteTemporada tiqueteTemporada;
+	private VentaOnline ventaOnline;
 
 	private List<Empleado> empleados;
 	private List<Cliente> clientes;
+	private List<Tiquete> tiquetes;
+	private List<Atraccion> atraccionesDiamante;
 
 	public Principal() {
 
@@ -70,16 +86,16 @@ public class Principal {
 		LocalDateTime finNocturno = LocalDateTime.of(2025, 4, 3, 2, 0);
 		turnoNocturno = new Turno("Nocturno", inicioNocturno, finNocturno);
 
-		// Fecha en que se asignarán los turnos
+		// Fecha en que se asignaran los turnos
 		LocalDate fechaTurno = LocalDate.of(2025, 4, 2); // 2 de abril de 2025
 
 		// Creamos las instancias de los empleados
-		administrador = new Administrador("Juan123", "123", "Juan Carlos", 100, "administracion", turnoDiurno);
-		cajero = new Cajero("Pablo15", "123", "Pablo Mancera", 200, "taquilla", turnoDiurno, true);
-		cocinero = new Cocinero("Paola25", "123", "Paola Suarez", 300, "cocina", turnoDiurno, true);
+		administrador = new Administrador("Juan123", "123", "Juan Carlos", 100, "Administracion", turnoDiurno);
+		cajero = new Cajero("Pablo15", "123", "Pablo Mancera", 200, "Taquilla", turnoDiurno, true);
+		cocinero = new Cocinero("Paola25", "123", "Paola Suarez", 300, "Cocina", turnoDiurno, true);
 		lugarServicio = new LugarServicio("cocina");
 		operadorMecanico = new OperadorMecanico("JuanPablo1", "123", "Juan Pablo Correa", 400, "MontanaRusa", true, atraccionMecanica, turnoDiurno);
-		servicioGeneral = new ServicioGeneral("Ernesto1", "123", "Ernesto Lopez", 500, "baños", turnoNocturno);
+		servicioGeneral = new ServicioGeneral("Ernesto1", "123", "Ernesto Lopez", 500, "Baños", turnoNocturno);
 
 		// Asignamos turnos a los empleados
 		administrador.asignarTurno(fechaTurno, turnoDiurno);
@@ -94,6 +110,20 @@ public class Principal {
 		empleados.add(cocinero);
 		empleados.add(operadorMecanico);
 		empleados.add(servicioGeneral);
+		
+		// Creamos las instancias de un cliente y los tiquetes
+		atraccionesDiamante = new ArrayList<Atraccion>();
+		atraccionesDiamante.add(atraccionMecanica);
+		
+		tiqueteDiamante= new TiqueteDiamante(atraccionesDiamante, true);
+		tiquetes= new ArrayList<Tiquete>();
+		tiquetes.add(tiqueteDiamante);
+		
+		cliente= new Cliente("Felipe1", "123", "Felipe Garcia", tiquetes);
+		clientes= new ArrayList<Cliente>();
+		clientes.add(cliente);
+		
+		
 
 		// Activamos el Buffer Reader para leer informacion de la consola
 		this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -196,11 +226,13 @@ public class Principal {
 			// Consultas relacionadas con los usuarios del parque
 			else if (op == 2) {
 				System.out.println("Ingrese el tipo de usuario:");
+				System.out.println("0. Salir");
 				System.out.println("1. Empleado");
 				System.out.println("2. Cliente");
 				int tipoUsuario = Integer.parseInt(leerConsola());
-
-				if (tipoUsuario == 1) {
+				if (tipoUsuario == 0) {
+					op = 0;
+				}else if (tipoUsuario == 1) {
 					System.out.println("Ingrese el nombre del empleado para verificar si tiene turnos:");
 					String nombre = leerConsola();
 					boolean encontrado = false;
@@ -209,7 +241,7 @@ public class Principal {
 						if (e.getNombre().equalsIgnoreCase(nombre)) {
 							encontrado = true;
 
-							System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+							System.out.println("Ingrese la fecha para consultar si tiene turno (YYYY-MM-DD):");
 							System.out.println("Probar con 2025-04-02");
 							String fechaTexto = leerConsola();
 							try {
@@ -238,7 +270,7 @@ public class Principal {
 						System.out.println("Empleado no encontrado.");
 					}
 				} else if (tipoUsuario == 2) {
-					System.out.println("Ingrese el nombre del cliente:");
+					System.out.println("Ingrese el nombre del cliente del cual se desean conocer sus tiquetes:");
 					String nombreCliente = leerConsola();
 					boolean encontrado = false;
 					for (Cliente c : clientes) {
@@ -261,6 +293,7 @@ public class Principal {
 			// Consultas relacionadas con el sistema de tiquetes
 			else if (op == 3) {
 				System.out.println("Menú de consulta de tiquetes");
+				System.out.println("0. Salir");
 				System.out.println("1. Ver todos los clientes registrados");
 				System.out.println("2. Ver tiquetes de un cliente específico");
 				int subop = Integer.parseInt(leerConsola());
