@@ -12,22 +12,40 @@ Primer proyecto del curso **Diseño y Programación Orientada a Objetos**, basad
 
 ## Descripción  
 Este proyecto modela un **sistema de administración para un parque de atracciones**, aplicando **principios de POO** y patrones de diseño.  
-Las funcionalidades clave incluyen:  
 
-✅ **Gestión de atracciones y espectáculos**  
-- Control de acceso según restricciones de **edad, peso y altura**.  
-- Disponibilidad de atracciones por **temporada o clima**.  
+## Funcionalidades Clave
 
-✅ **Administración de empleados**  
-- Asignación de **roles y turnos** (operadores, cajeros, cocineros, etc.).  
-- Validación de capacitación según el nivel de riesgo de cada atracción.  
+- **Gestión de Atracciones y Espectáculos**  
+  - Validación de acceso a atracciones mecánicas y culturales  
+  - Evalúa si un cliente cumple con los requisitos de altura, peso o edad, y si tiene condiciones médicas que lo impidan.  
+  - Disponibilidad según temporada o clima  
+  - Consulta si una atracción o espectáculo está disponible en la fecha actual.  
 
-✅ **Venta y validación de tiquetes**  
-- Diferentes tipos de **tiquetes** (Básico, Familiar, Oro, Diamante).  
-- Compra de **FastPass** para acceso rápido a atracciones.  
-- Registro de uso de tiquetes para evitar fraudes.
+- **Administración de Empleados**  
+  - Se gestionan turnos diurnos y nocturnos para empleados con fecha, hora de inicio y fin.  
+  - Verificación de turnos asignados  
+  - Consultas personalizadas para saber si un empleado tiene turno en una fecha dada.  
+  - Empleados como operadores mecánicos, cajeros o cocineros deben cumplir condiciones según su rol.  
 
-## 📂 Estructura del Proyecto  
+- **Venta y Validación de Tiquetes**  
+  - Soporte para múltiples tipos de tiquete:  
+    - Básico  
+    - Familiar  
+    - Oro  
+    - Diamante  
+  - Consulta de tiquetes por cliente  
+  - Muestra los tiquetes asociados a cada cliente y si ya han sido usados.  
+  - Compra simulada de tiquetes  
+  - Los tiquetes pueden incluir acceso a diferentes atracciones o beneficios como FastPass.  
+
+## Estructura del proyecto
+
+- **El sistema se organiza en distintos paquetes:**
+	-	atracciones: Atracciones mecánicas, culturales y espectáculos.
+	-	persona: Roles y turnos del personal del parque.
+	-	tiquetes: Gestión de clientes, tipos de tiquetes y puntos de venta.
+	-	principal: Lógica principal que conecta todos los módulos.
+ 
 ```bash
 src/
 ├── principal/
@@ -49,22 +67,23 @@ src/
 │   ├── Administrador.java
 │   ├── Cajero.java      
 │   └── (Otros roles: Cocinero, OperadorMecánico, etc.)
-├── tests/
-│   └── AtraccionTest.java 
+tests/
+    └── AtraccionTest.java 
 ```
-## Funcionalidades Destacadas
 
-✅ Consultar requisitos de atracciones:
-- Verificar altura, peso y restricciones de salud en atracciones mecánicas.
-- Validar edad mínima en atracciones culturales.
+## Menú Interactivo en Consola
 
-✅ Gestión de empleados:
-- Asignar turnos y lugares de trabajo.
-- Restringir funciones según capacitación (ej: un cajero no puede operar una atracción).
+La clase Principal ofrece un menú de interacción desde la consola para:
+1.	Consultar requisitos de atracciones y verificar disponibilidad de espectáculos o atracciones.
+2.	Consultar turnos de empleados y tiquetes de clientes.
+3.	Ver clientes registrados y tiquetes por cliente.
+4.	Registrar un nuevo cliente y realizar la compra de tiquetes.
 
-✅ Venta de tiquetes:
-- Comprar entradas en línea o en taquillas físicas.
-- Validar acceso según categoría del tiquete y requisitos de atracción.
+## Ejemplo de Uso
+-	Consulta si un cliente puede ingresar a una montaña rusa con altura/peso dados.
+-	Verifica si un espectáculo se realizará en una fecha determinada.
+-	Pregunta si el cajero “Pablo Mancera” tiene turno el 2 de abril de 2025.
+-	Muestra los tiquetes del cliente “Juan Jimenez”.
 
 ## Pruebas Unitarias
 
