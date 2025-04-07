@@ -33,7 +33,7 @@ public class Principal {
 	public Principal() {
 		
 		// Creamos una instancia de todas las clases para probarlas
-		atraccionCultural= new AtraccionCultural(null, 0, 0, false, null, 0);
+		atraccionCultural= new AtraccionCultural("Carrusel", 20, 2, true, "familiar", 5);
 		atraccionMecanica= new AtraccionMecanica(null, 0, 0, false, null, 0, 0, 0, 0, null, null);
 		
 		this.br = new BufferedReader(new InputStreamReader(System.in));
