@@ -38,7 +38,30 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
   - Consulta de tiquetes por cliente  
   - Muestra los tiquetes asociados a cada cliente y si ya han sido usados.  
   - Compra simulada de tiquetes  
-  - Los tiquetes pueden incluir acceso a diferentes atracciones o beneficios como FastPass.  
+  - Los tiquetes pueden incluir acceso a diferentes atracciones o beneficios como FastPass.
+    
+- **Persistencia de datos**  
+  - Permite la lectura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los empleados.
+  - Permite la lectura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los clientes.
+  - Se usa BufferedReader y se lee cada linea del documento para después filtrar los datos de esta y añadirlos al programa.
+    ```bash
+    public ArrayList<String> leer (String nombreArchivo){
+		ArrayList<String> lineasTexto = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+			String linea;
+			while((linea = br.readLine()) != null) {
+				lineasTexto.add(linea);
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return lineasTexto;
+	}
+    ```
 
 ## Estructura del proyecto
 
@@ -47,6 +70,7 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
 	-	persona: Roles y turnos del personal del parque.
 	-	tiquetes: Gestión de clientes, tipos de tiquetes y puntos de venta.
 	-	principal: Lógica principal que conecta todos los módulos.
+ 	-	persistencia: Permite leer los datos de un archivo CSV dado e incorporarlos en el proyecto	
  
 ```bash
 src/
@@ -69,8 +93,10 @@ src/
 │   ├── Administrador.java
 │   ├── Cajero.java      
 │   └── (Otros roles: Cocinero, OperadorMecánico, etc.)
+├── persistencia/
+│   └── ArchivoPlano.java
 tests/
-    └── AtraccionTest.java 
+    └── AtraccionTest.java
 ```
 
 ## Menú Interactivo en Consola
@@ -84,9 +110,9 @@ La clase Principal ofrece un menú de interacción desde la consola para:
 ## Ejemplo de Uso
 -	Consulta si un cliente puede ingresar a una montaña rusa con altura/peso dados.
 -	Verifica si un espectáculo se realizará en una fecha determinada.
--	Pregunta si el cajero “Pablo Mancera” tiene turno el 2 de abril de 2025.
+-	Pregunta si el cajero “Luis Perez” tiene turno el 2 de abril de 2025.
 -	Si no se encuentra el empleado buscado se puede crear con un nombre, login y password personalizado.
--	Muestra los tiquetes del cliente “Juan Jimenez”.
+-	Muestra los tiquetes del cliente “Carlos Soto”.
 
 ## Pruebas Unitarias
 
