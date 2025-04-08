@@ -146,7 +146,7 @@ public class Principal {
 		// Inciamos el menu principal de la aplicacion
 		do {
 			System.out.println("Digite:\n" + "0. Salir\n" + "1. Consultar requisito atraccion\n"
-					+ "2. Consultar usuario\n" + "3. Consultar tiquetes\n"+ "4. Comprar tiquetes");
+					+ "2. Consultas Trabajadores\n" + "3. Consultar tiquetes\n"+ "4. Comprar tiquetes");
 			op = Integer.parseInt(leerConsola());
 
 			// Consultas relacionadas con las atracciones del parque
@@ -239,10 +239,11 @@ public class Principal {
 
 			// Consultas relacionadas con los usuarios del parque
 			else if (op == 2) {
-				System.out.println("Ingrese el tipo de usuario:");
+				System.out.println("Ingrese la opcion a realizar:");
 				System.out.println("0. Salir");
-				System.out.println("1. Empleado");
-				System.out.println("2. Cliente");
+				System.out.println("1. Consultar turno Empleado");
+				System.out.println("2. Registrar Empleado");
+				System.out.println("3. Ver Empleados actuales");
 				int tipoUsuario = Integer.parseInt(leerConsola());
 				if (tipoUsuario == 0) {
 					op = 0;
@@ -282,24 +283,93 @@ public class Principal {
 
 					if (!encontrado) {
 						System.out.println("Empleado no encontrado.");
-					}
-				} else if (tipoUsuario == 2) {
-					System.out.println("Ingrese el nombre del cliente del cual se desean conocer sus tiquetes:");
-					String nombreCliente = leerConsola();
-					boolean encontrado = false;
-					for (Cliente c : clientes) {
-						if (c.getNombre().equalsIgnoreCase(nombreCliente)) {
-							encontrado = true;
-							System.out.println("Tiquetes del cliente:");
-							for (Tiquete t : c.getTiquetes()) {
-								System.out
-								.println("- Tipo: " + t.getTipo() + ", Usado: " + (t.isUsado() ? "Sí" : "No"));
+						System.out.println("Empleado no encontrado. ¿Desea registrarlo? (s/n)");
+						String respuesta = leerConsola();
+						if (respuesta.equalsIgnoreCase("s")) {
+							System.out.println("Ingrese login:");
+							String login = leerConsola();
+							System.out.println("Ingrese contraseña:");
+							String password = leerConsola();
+							System.out.println("Seleccione el tipo de empleado que se va a registrar:");
+							System.out.println("1. Cajero");
+							System.out.println("2. Cocinero");
+							System.out.println("3. Operador Mecanico");
+							System.out.println("4. Servicio General");
+
+							int tipo = Integer.parseInt(leerConsola());
+							LocalDate fechaTurnoNuevoEmpleado = LocalDate.of(2025, 4, 2); // 2 de abril de 2025
+							
+							if (tipo == 1) {
+								Cajero empleadoEncontrado = new Cajero(login, password, nombre, 1, "Taquilla", turnoDiurno, true);
+								empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+								empleados.add(empleadoEncontrado);
+							} else if (tipo == 2) {
+								Cocinero empleadoEncontrado= new Cocinero(login, password, nombre, 1, "Cocina", turnoDiurno, true);
+								empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+								empleados.add(empleadoEncontrado);
+							} else if (tipo == 3) {
+								OperadorMecanico empleadoEncontrado= new OperadorMecanico(login, password, nombre, 1, "MontanaRusa", true, atraccionMecanica, turnoDiurno);
+								empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+								empleados.add(empleadoEncontrado);
+							} else if (tipo == 4) {
+								ServicioGeneral empleadoEncontrado= new ServicioGeneral(login, password, nombre, 1, "Baños", turnoDiurno);
+								empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+								empleados.add(empleadoEncontrado);
+							} else {
+								System.out.println("Tipo de empleado inválido.");
+								return;
 							}
-							break;
+							System.out.println("Empleado registrado exitosamente.");
+						} else {
+							System.out.println("Proceso cancelado.");
+							return;
 						}
 					}
-					if (!encontrado) {
-						System.out.println("Cliente no encontrado.");
+				} else if (tipoUsuario == 2) {
+					System.out.println("Ingrese el nombre:");
+					String nombre = leerConsola();
+					System.out.println("Ingrese login:");
+					String login = leerConsola();
+					System.out.println("Ingrese contraseña:");
+					String password = leerConsola();
+					System.out.println("Seleccione el tipo de empleado que se va a registrar:");
+					System.out.println("1. Cajero");
+					System.out.println("2. Cocinero");
+					System.out.println("3. Operador Mecanico");
+					System.out.println("4. Servicio General");
+
+					int tipo = Integer.parseInt(leerConsola());
+					LocalDate fechaTurnoNuevoEmpleado = LocalDate.of(2025, 4, 2); // 2 de abril de 2025
+					
+					if (tipo == 1) {
+						Cajero empleadoEncontrado = new Cajero(login, password, nombre, 1, "Taquilla", turnoDiurno, true);
+						empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+						empleados.add(empleadoEncontrado);
+					} else if (tipo == 2) {
+						Cocinero empleadoEncontrado= new Cocinero(login, password, nombre, 1, "Cocina", turnoDiurno, true);
+						empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+						empleados.add(empleadoEncontrado);
+					} else if (tipo == 3) {
+						OperadorMecanico empleadoEncontrado= new OperadorMecanico(login, password, nombre, 1, "MontanaRusa", true, atraccionMecanica, turnoDiurno);
+						empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+						empleados.add(empleadoEncontrado);
+					} else if (tipo == 4) {
+						ServicioGeneral empleadoEncontrado= new ServicioGeneral(login, password, nombre, 1, "Baños", turnoDiurno);
+						empleadoEncontrado.asignarTurno(fechaTurnoNuevoEmpleado, turnoDiurno);
+						empleados.add(empleadoEncontrado);
+					} else {
+						System.out.println("Tipo de empleado inválido.");
+						return;
+					}
+					System.out.println("Empleado registrado exitosamente.");
+				}else if (tipoUsuario == 3) {
+					if (empleados.isEmpty()) {
+						System.out.println("No hay empleados registrados.");
+					} else {
+						System.out.println("Empleados registrados:");
+						for (Empleado e : empleados) {
+							System.out.println("- " + e.getNombre());
+						}
 					}
 				}
 			}
