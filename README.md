@@ -25,7 +25,9 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
   - Se gestionan turnos diurnos y nocturnos para empleados con fecha, hora de inicio y fin.  
   - Verificación de turnos asignados  
   - Consultas personalizadas para saber si un empleado tiene turno en una fecha dada.  
-  - Empleados como operadores mecánicos, cajeros o cocineros deben cumplir condiciones según su rol.  
+  - Empleados como operadores mecánicos, cajeros o cocineros deben cumplir condiciones según su rol.
+  - Registro de nuevos empleados especificando el tipo de estos.
+  - Consulta de empleados actuales registrados en la aplicación. 
 
 - **Venta y Validación de Tiquetes**  
   - Soporte para múltiples tipos de tiquete:  
@@ -75,7 +77,7 @@ tests/
 
 La clase Principal ofrece un menú de interacción desde la consola para:
 1.	Consultar requisitos de atracciones y verificar disponibilidad de espectáculos o atracciones.
-2.	Consultar turnos de empleados y tiquetes de clientes.
+2.	Consultar turnos de empleados y registra empleados nuevo o consulta los actuales.
 3.	Ver clientes registrados y tiquetes por cliente.
 4.	Registrar un nuevo cliente y realizar la compra de tiquetes.
 
@@ -83,6 +85,7 @@ La clase Principal ofrece un menú de interacción desde la consola para:
 -	Consulta si un cliente puede ingresar a una montaña rusa con altura/peso dados.
 -	Verifica si un espectáculo se realizará en una fecha determinada.
 -	Pregunta si el cajero “Pablo Mancera” tiene turno el 2 de abril de 2025.
+-	Si no se encuentra el empleado buscado se puede crear con un nombre, login y password personalizado.
 -	Muestra los tiquetes del cliente “Juan Jimenez”.
 
 ## Pruebas Unitarias
