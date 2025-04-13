@@ -415,6 +415,10 @@ public class Principal {
                         return;
                     }
                     System.out.println("Empleado registrado exitosamente.");
+                    
+                    // TODO: Falta añadir el guardado de los empleados en el CSV
+                    // Problema al recorrerlos porque se deberia hacer un caso por cada tipo, implementar
+                    
                 } else if (tipoUsuario == 3) {
                     if (empleados.isEmpty()) {
                         System.out.println("No hay empleados registrados.");
@@ -522,6 +526,29 @@ public class Principal {
                     return;
                 }
                 System.out.println("Tiquete agregado exitosamente al cliente " + clienteEncontrado.getNombre());
+                
+                /**
+                ESCRITURA CLIENTES AL CSV
+                */
+                ArrayList<String> lineasCliente = new ArrayList<>();
+                
+                for (Cliente cliente : clientes) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(cliente.getLogin()).append(",");
+                    sb.append(cliente.getPassword()).append(",");
+                    sb.append(cliente.getNombre()).append(",");
+
+                    ArrayList<String> nombresTiquetes = new ArrayList<>();
+                    for (Tiquete t : cliente.getTiquetes()) {
+                        nombresTiquetes.add(t.getClass().getSimpleName().replace("Tiquete", "")); // Ej: TiqueteOro → Oro
+                    }
+                    sb.append(String.join(";", nombresTiquetes));
+                    
+                    lineasCliente.add(sb.toString());
+                }
+                
+                ArchivoPlano archivoPlano = new ArchivoPlano();
+                archivoPlano.escribir("datos/clientes.csv", lineasCliente);
             }
         } while (op != 0);
 		try {
