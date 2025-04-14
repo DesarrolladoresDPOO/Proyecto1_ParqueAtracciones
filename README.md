@@ -10,9 +10,6 @@ Primer proyecto del curso **Diseño y Programación Orientada a Objetos**, basad
 
 ---
 
-## Descripción  
-Este proyecto modela un **sistema de administración para un parque de atracciones**, aplicando **principios de POO** y patrones de diseño.  
-
 ## Funcionalidades Clave
 
 - **Gestión de Atracciones y Espectáculos**  
@@ -41,9 +38,10 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
   - Los tiquetes pueden incluir acceso a diferentes atracciones o beneficios como FastPass.
     
 - **Persistencia de datos**  
-  - Permite la lectura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los empleados.
-  - Permite la lectura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los clientes.
+  - Permite la lectura y la escritura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los empleados.
+  - Permite la lectura y la escritura de datos provenientes de un archivo de tipo CSV donde esta contenida la información de los clientes.
   - Se usa BufferedReader y se lee cada linea del documento para después filtrar los datos de esta y añadirlos al programa.
+  - Se usa BufferedWriter para escribir en el archivo CSV los nuevos clientes y los nuevos empleados añadidos durante la ejecucio
     ```bash
     public ArrayList<String> leer (String nombreArchivo){
 		ArrayList<String> lineasTexto = new ArrayList<String>();
@@ -61,7 +59,20 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
 		}
 		return lineasTexto;
 	}
-    ```
+
+
+    public void escribir(String nombreArchivo, ArrayList<String> lineasTexto) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
+			for(String linea : lineasTexto) {
+				bw.write(linea);
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 ## Estructura del proyecto
 
@@ -70,7 +81,7 @@ Este proyecto modela un **sistema de administración para un parque de atraccion
 	-	persona: Roles y turnos del personal del parque.
 	-	tiquetes: Gestión de clientes, tipos de tiquetes y puntos de venta.
 	-	principal: Lógica principal que conecta todos los módulos.
- 	-	persistencia: Permite leer los datos de un archivo CSV dado e incorporarlos en el proyecto	
+ 	-	persistencia: Permite leer y escribir datos de un archivo CSV dado e incorporarlos en el proyecto	
  
 ```bash
 src/
@@ -101,6 +112,7 @@ tests/
 
 ## Menú Interactivo en Consola
 
+Para correr la aplicación se debe ejecutar la clase principal donde se encuentra el metodo main
 La clase Principal ofrece un menú de interacción desde la consola para:
 1.	Consultar requisitos de atracciones y verificar disponibilidad de espectáculos o atracciones.
 2.	Consultar turnos de empleados y registra empleados nuevo o consulta los actuales.
