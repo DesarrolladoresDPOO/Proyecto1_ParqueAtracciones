@@ -321,7 +321,7 @@ public class Principal {
                     for (Empleado e : empleados) {
                         if (e.getNombre().equalsIgnoreCase(nombreEmpleado)) {
                             encontrado = true;
-                            System.out.println("Ingrese la fecha para consultar turno (YYYY-MM-DD): (Pruebe con 2025-04-02)");
+                            System.out.println("Ingrese la fecha para consultar turno (YYYY-MM-DD): (Pruebe con: 2025-04-02)");
                             String fechaTexto = leerConsola();
                             try {
                                 LocalDate fecha = LocalDate.parse(fechaTexto);
@@ -377,6 +377,23 @@ public class Principal {
                                 return;
                             }
                             System.out.println("Empleado registrado exitosamente.");
+                            
+                            ArrayList<String> lineasEmpleado = new ArrayList<>();
+                            for (Empleado empleado : empleados) {
+                                StringBuilder sb = new StringBuilder();
+                                // Tipo de empleado, nombre de la subclase
+                                sb.append(empleado.getClass().getSimpleName()).append(",");
+                                sb.append(empleado.getLogin()).append(",");
+                                sb.append(empleado.getPassword()).append(",");
+                                sb.append(empleado.getNombre()).append(",");
+                                sb.append(empleado.getId()).append(",");
+                                sb.append(empleado.getLugarTrabajo()).append(",");
+                                sb.append(empleado.getTurno());
+                                lineasEmpleado.add(sb.toString());
+                            }
+                            
+                            ArchivoPlano archivoPlano = new ArchivoPlano();
+                            archivoPlano.escribir("datos/empleados.csv", lineasEmpleado);
                         } else {
                             System.out.println("Proceso cancelado.");
                             return;
@@ -416,8 +433,22 @@ public class Principal {
                     }
                     System.out.println("Empleado registrado exitosamente.");
                     
-                    // TODO: Falta añadir el guardado de los empleados en el CSV
-                    // Problema al recorrerlos porque se deberia hacer un caso por cada tipo, implementar
+                    ArrayList<String> lineasEmpleado = new ArrayList<>();
+                    for (Empleado empleado : empleados) {
+                        StringBuilder sb = new StringBuilder();
+                        // Tipo de empleado, nombre de la subclase
+                        sb.append(empleado.getClass().getSimpleName()).append(",");
+                        sb.append(empleado.getLogin()).append(",");
+                        sb.append(empleado.getPassword()).append(",");
+                        sb.append(empleado.getNombre()).append(",");
+                        sb.append(empleado.getId()).append(",");
+                        sb.append(empleado.getLugarTrabajo()).append(",");
+                        sb.append(empleado.getTurno());
+                        lineasEmpleado.add(sb.toString());
+                    }
+                    
+                    ArchivoPlano archivoPlano = new ArchivoPlano();
+                    archivoPlano.escribir("datos/empleados.csv", lineasEmpleado);
                     
                 } else if (tipoUsuario == 3) {
                     if (empleados.isEmpty()) {
